@@ -1,7 +1,7 @@
 
 describe('adding and deleting a todo list', () => {
   beforeEach(() => {
-    cy.visit('/projects/14993480/todo-lists', {
+    cy.visit('/projects/14994141/todo-lists', {
       timeout: 20000,
     })
     cy.get("#email").type("fpujols@webfx.com");
