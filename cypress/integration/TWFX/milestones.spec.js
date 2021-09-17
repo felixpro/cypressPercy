@@ -85,7 +85,7 @@ describe('Milestones', () => {
     });
 
 
-  // After we fix the cache error when deleting Events, we can use the next tests. 
+  // // After we fix the cache error when deleting Events, we can uncomment the assertions for events
 
     it("Should create a single day Event", () => {
       cy.contains('Add a New Milestone').click();
@@ -93,6 +93,13 @@ describe('Milestones', () => {
       cy.get('#title').clear();
       cy.get('#title').type('Admin - New event');
       cy.contains('ADD EVENT').click();
+    });
+
+    it("Should edit a single day event", () => {
+      cy.get('.event-container').click();
+      cy.get('#title').type(' - edited');
+      cy.contains('SAVE CHANGES').click();
+      cy.contains('Admin - New event - edited').should('not.exist');    
     });
 
     it("Should delete a single day event", () => {
