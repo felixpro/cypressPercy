@@ -66,7 +66,7 @@ describe('Milestones', () => {
       cy.contains('Admin - New milestone').click();
       cy.contains('Delete milestone').click();
       cy.get('.confirm_btn').click();
-      cy.contains('Admin - New milestone').should('not.exist');
+      cy.contains('Admin - Nw milestone').should('not.exist');
 
       cy.contains('Admin - New private milestone ').click();
       cy.contains('Delete milestone').click();
@@ -87,20 +87,41 @@ describe('Milestones', () => {
 
   // After we fix the cache error when deleting Events, we can use the next tests. 
 
-    //   it("Should create an Event", () => {
-    //   cy.contains('Add a New Milestone').click();
-    //   cy.get('#event').click();
-    //   cy.get('#title').clear();
-    //   cy.get('#title').type('Admin - New event');
-    //   cy.contains('ADD EVENT').click();
-    // });
+    it("Should create a single day Event", () => {
+      cy.contains('Add a New Milestone').click();
+      cy.get('#event').click();
+      cy.get('#title').clear();
+      cy.get('#title').type('Admin - New event');
+      cy.contains('ADD EVENT').click();
+    });
+
+    it("Should delete a single day event", () => {
+      cy.get('.event-container').click();
+      cy.contains('Delete event').click();
+      cy.get('.confirm_btn').click();
+      // cy.contains('Admin - New event').should('not.exist');    
+    });
+    
+
+    it("Should create a multi day Event", () => {
+      cy.contains('Add a New Milestone').click();
+      cy.get('#event').click();
+      cy.get('#title').clear();
+      cy.get('#title').type('Admin - Multi day event');
+
+      cy.get('.datePicker').first().click();
+      cy.get('.datePicker').contains('15').click();
+      cy.get('.datePicker').last().click();
+      cy.get('.datePicker').contains('16').click();
+      //  cy.contains('Admin - Multi day event');
+      cy.contains('ADD EVENT').click();
+    });
    
-    // it("Should delete an Event", () => {
-    //   cy.contains('Admin - New event').click();
-    //   cy.contains('Delete event').click();
-    //   cy.get('.confirm_btn').click();
-    //   cy.contains('Admin - New event').should('not.exist');
-    // });
+    it("Should delete a multi day events", () => {
+      cy.get('.event-container').first().click({force: true});
+      cy.contains('Delete event').click();
+      cy.get('.confirm_btn').click();
+      // cy.contains('Admin - Multi day event').should('not.exist');      
+    });
     
 });
-  
